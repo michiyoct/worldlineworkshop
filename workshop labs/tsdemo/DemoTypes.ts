@@ -18,7 +18,7 @@ let thing = 'pencil';
 
 
 
-// any type
+// any type, emulates the equivalent of dynamic typing in vanilla JS
 let notSure: any = 4;
 notSure = "maybe a string instead";
 console.log('My type is ' + typeof notSure);

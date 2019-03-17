@@ -1,0 +1,102 @@
+<h1> Form for {{myRole}}</h1>
+
+<form [formGroup]="employeeForm" (ngSubmit)=createEmployee()>
+
+  <div class="employee-name">
+    Name:<br>
+    <input type="text" name="employeeName" formControlName="name">
+  </div>
+
+  <div *ngIf="employeeForm.get('name').invalid &&
+  ( employeeForm.get('name').dirty ||
+  employeeForm.get('name').touched )">
+      <div *ngIf="employeeForm.get('name').errors.required">
+        Name is required
+      </div>
+      <div *ngIf="employeeForm.get('name').errors.pattern">
+        Name can only have alphabets
+      </div>
+  </div>  
+
+
+  <div class="employee-age">
+      Age:<br>
+      <input type="number"  name="employeeAge" formControlName="age">
+  </div>
+
+  <div *ngIf="employeeForm.get('age').invalid &&
+  ( employeeForm.get('age').dirty ||
+  employeeForm.get('age').touched )">
+      <div *ngIf="employeeForm.get('age').errors.required">
+        Age is required
+      </div>
+      <div *ngIf="employeeForm.get('age').errors.min">
+        Age must be 20 or higher
+      </div>
+      <div *ngIf="employeeForm.get('age').errors.max">
+        Age must be 80 or lower
+      </div>
+  </div>  
+
+  <div class="employee-email">
+    Email:<br>
+    <input type="text" name="employeeEmail" formControlName="email">
+  </div>
+
+  <div *ngIf="employeeForm.get('email').invalid &&
+  ( employeeForm.get('email').dirty ||
+  employeeForm.get('email').touched )">
+      <div *ngIf="employeeForm.get('email').errors.required">
+        Email is required
+      </div>
+      <div *ngIf="employeeForm.get('email').errors.email">
+        Email is incorrect form
+      </div>
+  </div>   
+
+  <div [ngSwitch]="myRole">
+    <div *ngSwitchCase="'Admin'">
+      
+      <div class="employee-os">
+          OS used:<br>
+          <input type="text" maxlength=10 name="employeeOs" formControlName="os">
+          <br>
+      </div>
+
+      <div *ngIf="employeeForm.get('os').invalid &&
+      ( employeeForm.get('os').dirty ||
+      employeeForm.get('os').touched )">
+            OS is required
+      </div>       
+
+    </div>
+    <div *ngSwitchCase="'Developer'">
+      
+      <div class="employee-languages">
+          Languages developed in:<br>
+          <input type="text" name="employeeLanguages" formControlName="languages">
+          <br>
+      </div>
+
+      <div *ngIf="employeeForm.get('languages').invalid &&
+      ( employeeForm.get('languages').dirty ||
+      employeeForm.get('languages').touched )">
+          <div *ngIf="employeeForm.get('languages').errors.required">
+            Languages is required
+          </div>
+          <div *ngIf="employeeForm.get('languages').errors.minlength">
+            Languages must be 4 characters or more
+          </div>
+      </div>      
+
+    </div>    
+  </div>  
+
+  <button type="submit">Add record</button>
+
+</form> 
+<p>Form Control value: {{ employeeForm.value | json }}</p>
+<p>Form Control status: {{ employeeForm.status | json }}</p>
+
+
+

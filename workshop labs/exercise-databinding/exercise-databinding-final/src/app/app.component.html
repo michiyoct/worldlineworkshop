@@ -1,0 +1,10 @@
+<img [src]="'assets/images/'+ colorsMsgs[currentPos].colorName  +'.png'" height=100 width=100>
+
+<!-- <img [src]="assets/images/red.png" height=100 width=100> -->
+
+<button type="button" (click)="changeImage()">Action : {{  colorsMsgs[currentPos].buttonMsg}}</button>
+<form>
+  Enter a string :
+  <input type="text" name="firstname" (input)="evalInput($event)">
+</form>
+<p> {{evalMessage}}</p>

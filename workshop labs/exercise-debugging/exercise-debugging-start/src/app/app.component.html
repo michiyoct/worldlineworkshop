@@ -1,0 +1,8 @@
+<h1> My Cars</h1>
+<button type="button" (click)="onAddCar()">Add Car</button>
+<ol>
+  <li
+    *ngFor="let car of cars; let i = index"
+    (click)="onRemoveCar(i)">{{ car }}
+  </li>
+</ol>

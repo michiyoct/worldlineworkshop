@@ -1,0 +1,17 @@
+<form>
+  Enter a string :
+  <input type="text" name="firstname" (input)="boxValue=$event.target.value">
+</form>
+<div>
+  <button type="button" (click)="onSaveString()">Save string</button>
+</div>
+
+<button type="button" (click)="onToggleListAppear()">{{ buttonMsg }}</button>
+
+<div *ngIf="showList">
+  <div
+  *ngFor="let log of stringLog; let i=index"
+  [ngStyle]="{backgroundColor: i >= 4 ? 'lightblue' : 'transparent'}"
+  [ngClass]="{'important': log.length >= 5}"
+  >String # {{i+1}} : {{ log }}</div>
+</div>

@@ -12,6 +12,7 @@ export class HighlightService {
     if (this.importantStuff.length === 0) {
       return false;
     }
+
     const importantSkills: string[] = this.importantStuff.split(" ");
 
     for (const skillToCheck of importantSkills) {

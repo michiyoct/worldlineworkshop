@@ -16,12 +16,12 @@ const employees = [
 ]
 
 router.get('/', (req, res) => {
-  var query = (req.query['q'] || '').toLowerCase();
+  var query = (req.query['n'] || '').toLowerCase();
   if (query) {
 	console.log('Returning specific employee');
-    const foundStocks = stocks.filter(
-      (stock) => stock.name.toLowerCase().indexOf(query) != -1);
-    return res.status(200).json(foundStocks);
+    const foundEmployee = employees.filter(
+      (employee) => employee.name.toLowerCase().indexOf(query) != -1);
+    return res.status(200).json(foundEmployee);
   }
   console.log('Returning list of employees');
   return res.status(200).json(employees);
@@ -39,16 +39,30 @@ router.post('/', (req, res) => {
   return res.status(200).json({msg: 'Employee with name ' + employee.name + ' successfully created'});
 });
 
-router.patch('/:code', (req, res) => {
-  let stockCode = req.params.code;
-  let foundStock = stocks.find(each => each.code === stockCode);
-  if (foundStock) {
-    foundStock.favorite = req.body.favorite;
-    let msg = 'Stock with code ' + stockCode + ' is now ';
-    msg += foundStock.favorite ? ' favorited.' : ' unfavorited';
-    return res.status(200).json({msg: msg});
+router.patch('/:name', (req, res) => {
+  let employeeName = req.params.name;
+  console.log("Request to modify employee with name : " + employeeName);
+  let foundEmployee = employees.find(each => each.name === employeeName);
+  if (foundEmployee) {
+	console.log("Located employee : " + employeeName);
+	console.log("Modifying with these new fields");
+	console.log("Age : " + req.body.age);
+	console.log("Role : " + req.body.role);
+	console.log("Email : "  + req.body.email);
+	console.log("Languages : " +  req.body.languages);
+	console.log("OS : " + req.body.os);
+	
+	foundEmployee.age = req.body.age;
+	foundEmployee.role = req.body.role;
+	foundEmployee.email = req.body.email;
+	foundEmployee.languages = req.body.languages;
+	foundEmployee.os = req.body.os;
+	
+    return res.status(200).json({msg: "Employee details modified"});
+	  
   }
-  return res.status(400).json({msg: 'Stock with code ' + stockCode + ' not found!'});
+  return res.status(400).json({msg: 'Employee with name  : ' + employeeName + ' not found!'});
+ 
 });
 
 module.exports = router;

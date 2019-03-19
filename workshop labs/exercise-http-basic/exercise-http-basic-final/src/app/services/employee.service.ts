@@ -26,4 +26,16 @@ export class EmployeeService {
     return this.http.post('/api/employee', employee);
   }
 
+  updateEmployee(employee: Employee) : Observable<Employee> {
+    return this.http.patch<Employee>('/api/employee/' + employee.name,
+    {
+      age: employee.age,
+      role : employee.role,
+      email: employee.email,
+      languages : employee.languages,
+      os: employee.os
+    });
+  }
+
+
 }

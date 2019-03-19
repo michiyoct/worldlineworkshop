@@ -10,8 +10,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./employee-display.component.css']
 })
 export class EmployeeDisplayComponent implements OnInit {
+
   selectedEmployee: Employee;
   employeeList$: Observable<Employee[]>;
+  showList: boolean = true;
+  showModifyButton = false;
+  employeeRole: string = 'Developer';
+
 
   constructor(public employeeService: EmployeeService) { }
 
@@ -20,14 +25,16 @@ export class EmployeeDisplayComponent implements OnInit {
   }
 
   onSelectEmployee(pos: number) {
-    console.log(pos);
+
     this.employeeList$.subscribe(
       (employees) => {
         this.selectedEmployee = employees[pos];
-        console.log(employees[pos]);
-        console.log("asdfasdf");
       });
+    this.showModifyButton = true;
+  }
 
+  onModify() {
+    this.showList = false;
   }
 
 }
